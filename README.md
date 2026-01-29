@@ -27,7 +27,7 @@
 
 **COLA**（Clean Object-Oriented and Layered Architecture）是**阿里巴巴**出品的项目架构规范，在专业度上没得说。但实际怎么使用呢？
 
-对于喜欢 **Vibe Coding** 的同学来说，其实无需感知复杂的架构设计细节。**我将整个 COLA 架构规范转换成了 `cola-skill` 技能包**，分成 **Python 版**和 **Java 版**。
+对于喜欢 **Vibe Coding** 的同学来说，其实无需感知复杂的架构设计细节。**我将整个 COLA 架构规范转换成了 `cola-skill` 技能包**，分成 **Python 版**和 **Java 版**,(COLA 原生仅支持 Java 项目, 这里我整理了自己做 python 项目时设计架构的实践, 将其适配到 python 版,不论语言, 思想是相同的, 未来还会增加 go等版本.)。
 
 只需在支持 Skill 的 IDE（如 Claude Code、Windsurf）中加载该技能包，AI 就会自动帮你遵循 COLA 规范来组织代码！
 
