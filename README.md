@@ -59,7 +59,7 @@ vibe-blog 前期开发处于探索阶段，90% 的代码都是通过 Vibe Coding
 ### 重构前：混乱的代码库
 
 <p align="center">
-  <img src="./pics/vibe-blog-architect.png" alt="重构前的代码结构" />
+  <img src="./static/pics/vibe-blog-architect.png" alt="重构前的代码结构" />
 </p>
 
 ```
