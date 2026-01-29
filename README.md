@@ -1,6 +1,6 @@
 # COLA DDD Skill
 
-> Claude Code Skills 集合，提供 COLA 整洁分层架构设计指南。
+> 让 AI 自动帮你遵循 COLA 架构规范来组织代码的技能包，支持 Python 和 Java。
 
 ---
 
@@ -19,404 +19,74 @@
 - 🔧 **难以维护**，改一处崩十处
 - 👥 **协作困难**，每个人都有自己的"风格"
 
-**那么，如何将你的代码组织得井井有条呢？**
-
-这里面是有大学问的。不过，优秀的前辈们已经设计好了一套通用的规范，我们只需要遵守它，就也能写出**可维护的、项目结构清晰的代码**。
-
-在众多的项目规范里，我最喜欢、最常用的是 **COLA**。
-
-COLA 是**阿里巴巴**出品的项目架构规范，在专业度上没得说。不过实际怎么使用呢？尤其是对于喜欢 **Vibe Coding** 的同学来说，其实无需感知复杂的架构设计细节。
-
-**在这里，我就将整个 COLA 的架构规范转换成了一个 `cola-skill` 技能包**，分成 **Python 版**和 **Java 版**。你只需要在支持 Skill 的 IDE（如 Claude Code）中加载引入该技能包，就可以让 AI 自动帮你遵循 COLA 规范来组织代码了！
-
 ---
 
-## 背景: 为什么需要 COLA？
+## 💡 解决方案：COLA + cola-skill
 
-### 应用架构的意义
+**如何将代码组织得井井有条呢？** 优秀的前辈们已经设计好了一套通用的规范——**COLA**。
 
-**架构** = **要素** + **结构**
+**COLA**（Clean Object-Oriented and Layered Architecture）是**阿里巴巴**出品的项目架构规范，在专业度上没得说。但实际怎么使用呢？
 
-- **要素**：组成架构的重要元素
-- **结构**：要素之间的关系
+对于喜欢 **Vibe Coding** 的同学来说，其实无需感知复杂的架构设计细节。**我将整个 COLA 架构规范转换成了 `cola-skill` 技能包**，分成 **Python 版**和 **Java 版**。
 
-**应用架构的核心职责**：
-
-1. **定义良好的结构** - 让代码有章可循
-2. **治理应用复杂度** - 降低系统熵值
-3. **从混乱走向有序** - 从随心所欲的混乱状态，走向井井有条的有序状态
-
-### COLA 解决的问题
-
-| 问题 | COLA 的解决方案 |
-|------|----------------|
-| 🔴 **业务逻辑散落各处** | 领域层集中管理核心业务逻辑 |
-| 🔴 **技术实现与业务耦合** | 分层架构解耦，Infrastructure 实现 Domain 接口 |
-| 🔴 **代码难以测试** | 依赖倒置，Domain 层无外部依赖，易于单测 |
-| 🔴 **新人上手困难** | 标准化目录结构和命名规范 |
-| 🔴 **重构成本高** | 清晰的边界，改动影响范围可控 |
-| 🔴 **多业务线难以扩展** | Extension 扩展点机制支持多业务线 |
-
-### COLA 的设计思想
-
-好的应用架构都遵循一些共同模式，不管是**六边形架构**、**洋葱圈架构**、**整洁架构**，还是 **COLA 架构**，都提倡：
-
-- ✅ **以业务为核心** - Domain 层是整个架构的核心
-- ✅ **解耦外部依赖** - 通过 Gateway 接口隔离外部系统
-- ✅ **分离业务复杂度和技术复杂度** - 业务逻辑在 Domain，技术实现在 Infrastructure
-- ✅ **依赖倒置** - 高层模块不依赖低层模块，都依赖抽象
-
-**COLA 的独特之处**：除了思想之外，还提供了**可落地的工具和实践指导**（Archetypes、Components）。
-
----
-
-## 项目简介
-
-COLA DDD Skill 是一个 Claude Code Skills 集合，包含 COLA（Clean Object-Oriented and Layered Architecture）架构的 Python 和 Java 版本实现指南。
-
-本项目适用于：
-- 使用 DDD 分层架构设计后端应用
-- 重构现有项目到整洁架构
-- 学习 COLA 架构的最佳实践
-- 在 Python/Flask/FastAPI 或 Java/Spring Boot 项目中应用分层架构
-
-## 包含的 Skills
+只需在支持 Skill 的 IDE（如 Claude Code、Windsurf）中加载该技能包，AI 就会自动帮你遵循 COLA 规范来组织代码！
 
 | Skill | 描述 | 适用场景 |
 |-------|------|----------|
 | [python-cola-skill](./python-cola-skill/) | Python 版 COLA 架构指南 | Flask、FastAPI 项目 |
 | [java-cola-skill](./java-cola-skill/) | Java 版 COLA 架构指南 | Spring Boot 项目 |
 
-## 安装
-
-### 方法一：通过 Git 克隆（推荐）
-
-```bash
-# 克隆整个仓库到 skills 目录
-git clone https://github.com/lailoo/cola-DDD-skill.git ~/.claude/skills/cola-DDD-skill
-```
-
-或者只安装单个 skill：
-
-```bash
-# 只安装 Python COLA Skill
-git clone https://github.com/lailoo/cola-DDD-skill.git /tmp/cola-skill
-cp -r ~/cola-skill/python-cola-skill ~/.claude/skills/
-
-# 只安装 Java COLA Skill
-git clone https://github.com/lailoo/cola-DDD-skill.git ~/cola-skill
-cp -r ~/cola-skill/java-cola-skill ~/.claude/skills/
-```
-
-### 方法二：手动安装
-
-1. 下载本项目的 ZIP 文件或克隆到本地
-2. 将需要的 skill 文件夹复制到 Claude Code 的 skills 目录：
-   - **macOS/Linux**: `~/.claude/skills/`
-   - **Windows**: `%USERPROFILE%\.claude\skills\`
-
-3. 确保文件夹结构如下：
-   ```
-   ~/.claude/skills/
-   ├── python-cola-skill/
-   │   ├── SKILL.md
-   │   └── references/
-   │       ├── dto.md
-   │       ├── service.md
-   │       ├── gateway.md
-   │       └── example.md
-   └── java-cola-skill/
-       ├── SKILL.md
-       └── references/
-           ├── dto.md
-           ├── service.md
-           ├── gateway.md
-           └── example.md
-   ```
-
-### 验证安装
-
-重启 Claude Code 或重新加载 skills 后，在对话中输入：
-
-```
-/python-cola-skill
-```
-
-或
-
-```
-/java-cola-skill
-```
-
-如果安装成功，该技能将被激活。
-
-## 使用
-
-### 触发条件
-
-当你提到以下关键词时，相应的 Skill 会被自动激活：
-
-**通用关键词：**
-- COLA、DDD、分层架构、整洁架构
-- 六边形架构、洋葱圈架构、端口适配器架构
-- 代码分层、模块划分、架构重构
-- Gateway 模式、Repository 模式、CQRS
-
-**Python 专用：**
-- Python DDD、Flask 架构、FastAPI 架构
-- Python 后端架构、Python 项目结构
-
-**Java 专用：**
-- Java DDD、Spring Boot 架构
-- Maven 多模块、Java 项目结构
-
-### 使用场景示例
-
-#### 场景 1：新建 Python 项目
-
-```
-请帮我用 COLA 架构创建一个 Flask 用户管理系统
-```
-
-#### 场景 2：重构现有 Java 项目
-
-```
-我有一个 Spring Boot 单体应用，请帮我按 COLA 架构重构
-```
-
-#### 场景 3：创建特定组件
-
-```
-请帮我创建一个符合 COLA 规范的 UserGateway 接口和实现
-```
-
-## COLA 架构简介
-
-COLA = Clean Object-Oriented and Layered Architecture（整洁面向对象分层架构）
-
-### 分层结构
-
-```
-                        ┌─────────────────────────────────────┐
-  Driving Adapter:      │  浏览器  │  定时器  │  消息队列      │
-                        └─────────────────────────────────────┘
-                                         ↓
-  VO ←─────────────── ┌─────────────────────────────────────┐
-  (View Object)       │            Adapter 层                │
-                      │  controller │ scheduler │ consumer   │
-                      └─────────────────────────────────────┘
-                                         ↓
-  DTO ←────────────── ┌─────────────────────────────────────┐
-  (Data Transfer      │              App 层                  │
-   Object)            │       service  │  executor           │
-                      └─────────────────────────────────────┘
-                                         ↓
-  Entity ←─────────── ┌─────────────────────────────────────┐
-                      │            Domain 层                 │
-                      │   gateway │ model │ ability          │
-                      └─────────────────────────────────────┘
-                                         ↑
-  DO ←─────────────── ┌─────────────────────────────────────┐
-  (Data Object)       │        Infrastructure 层             │
-                      │  gatewayImpl │ mapper │ config       │
-                      └─────────────────────────────────────┘
-                                         ↓
-  Driven Adapter:     │    DB    │   Search   │    RPC      │
-```
-
-### COLA 组件
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                        COLA 组件（可选）                     │
-├─────────────┬─────────────┬─────────────┬─────────────────┤
-│ DTO 组件    │ Exception   │ Extension   │ StateMachine    │
-│             │ 组件        │ 组件        │ 组件            │
-├─────────────┼─────────────┼─────────────┼─────────────────┤
-│ CatchLog    │ Domain      │ RuleEngine  │ Test            │
-│ 组件        │ 组件        │ 组件        │ 组件            │
-└─────────────┴─────────────┴─────────────┴─────────────────┘
-```
-
-### COLA Archetypes
-
-COLA 提供两种项目脚手架：
-
-| Archetype | 用途 | 包含模块 |
-|-----------|------|----------|
-| `cola-archetype-web` | Web 应用（Adapter + 后端服务一体） | adapter, app, client, domain, infrastructure, start |
-| `cola-archetype-service` | 纯后端服务（无 Web 层） | app, client, domain, infrastructure, start |
-
-```bash
-# 创建 Web 应用
-mvn archetype:generate -DarchetypeArtifactId=cola-framework-archetype-web ...
-
-# 创建纯后端服务
-mvn archetype:generate -DarchetypeArtifactId=cola-framework-archetype-service ...
-```
-
-### 生成的项目结构示例
-
-**cola-archetype-web 生成结构：**
-
-```
-demo-web/
-├── demo-web-adapter/                    # 适配器层
-│   └── src/main/java/com/demo/
-│       ├── web/                         # REST Controller
-│       │   └── UserController.java
-│       ├── mobile/                      # 移动端接口
-│       ├── wap/                         # WAP 接口
-│       └── scheduler/                   # 定时任务
-│           └── DemoJob.java
-│
-├── demo-web-app/                        # 应用层
-│   └── src/main/java/com/demo/
-│       ├── command/                     # 命令执行器
-│       │   ├── UserAddCmdExe.java
-│       │   └── query/                   # 查询执行器
-│       │       └── UserListQryExe.java
-│       ├── service/                     # Service 实现
-│       │   └── UserServiceImpl.java
-│       └── event/                       # 事件处理
-│           └── handler/
-│
-├── demo-web-client/                     # 客户端层（API 定义）
-│   └── src/main/java/com/demo/
-│       ├── api/                         # 服务接口
-│       │   └── UserServiceI.java
-│       └── dto/                         # 数据传输对象
-│           ├── command/
-│           │   └── UserAddCmd.java
-│           ├── query/
-│           │   └── UserListQry.java
-│           └── clientobject/
-│               └── UserCO.java
-│
-├── demo-web-domain/                     # 领域层
-│   └── src/main/java/com/demo/domain/
-│       ├── user/                        # 用户聚合
-│       │   ├── User.java                # 实体
-│       │   └── UserStatus.java          # 值对象
-│       └── gateway/                     # Gateway 接口
-│           └── UserGateway.java
-│
-├── demo-web-infrastructure/             # 基础设施层
-│   └── src/main/java/com/demo/
-│       ├── gatewayimpl/                 # Gateway 实现
-│       │   └── UserGatewayImpl.java
-│       ├── convertor/                   # 对象转换器
-│       │   └── UserConvertor.java
-│       ├── dataobject/                  # 数据对象
-│       │   └── UserDO.java
-│       ├── mapper/                      # MyBatis Mapper
-│       │   └── UserMapper.java
-│       └── config/                      # 配置类
-│
-└── start/                               # 启动模块
-    └── src/main/java/com/demo/
-        └── Application.java
-```
-
-**cola-archetype-service 生成结构（无 adapter 层）：**
-
-```
-demo-service/
-├── demo-service-app/                    # 应用层
-│   └── src/main/java/com/demo/
-│       ├── command/                     # 命令执行器
-│       │   ├── OrderCreateCmdExe.java
-│       │   └── query/                   # 查询执行器
-│       │       └── OrderListQryExe.java
-│       ├── service/                     # Service 实现
-│       │   └── OrderServiceImpl.java
-│       └── event/                       # 事件处理
-│           └── handler/
-│               └── OrderEventHandler.java
-│
-├── demo-service-client/                 # 客户端层（供其他服务调用）
-│   └── src/main/java/com/demo/
-│       ├── api/                         # 服务接口（RPC/Dubbo）
-│       │   └── OrderServiceI.java
-│       └── dto/                         # 数据传输对象
-│           ├── command/
-│           │   └── OrderCreateCmd.java
-│           ├── query/
-│           │   └── OrderListQry.java
-│           └── clientobject/
-│               └── OrderCO.java
-│
-├── demo-service-domain/                 # 领域层
-│   └── src/main/java/com/demo/domain/
-│       ├── order/                       # 订单聚合
-│       │   ├── Order.java               # 聚合根
-│       │   ├── OrderItem.java           # 实体
-│       │   └── OrderStatus.java         # 值对象/枚举
-│       ├── gateway/                     # Gateway 接口
-│       │   └── OrderGateway.java
-│       └── ability/                     # 领域能力
-│           └── OrderAbility.java
-│
-├── demo-service-infrastructure/         # 基础设施层
-│   └── src/main/java/com/demo/
-│       ├── gatewayimpl/                 # Gateway 实现
-│       │   └── OrderGatewayImpl.java
-│       ├── convertor/                   # 对象转换器
-│       │   └── OrderConvertor.java
-│       ├── dataobject/                  # 数据对象
-│       │   └── OrderDO.java
-│       ├── mapper/                      # MyBatis Mapper
-│       │   └── OrderMapper.java
-│       └── config/                      # 配置类
-│           └── DataSourceConfig.java
-│
-└── start/                               # 启动模块
-    └── src/main/java/com/demo/
-        └── Application.java
-```
-
-### 依赖方向
-
-```
-Adapter → App → Domain ← Infrastructure
-              ↘      ↙
-               Client
-```
-
-- **Domain 层不依赖任何层**（纯业务逻辑）
-- **Infrastructure 实现 Domain 定义的 Gateway 接口**
-- **Client 层被所有层依赖（DTO 定义）**
-
-### 命名规范
-
-| 类型 | Python 后缀 | Java 后缀 |
-|------|-------------|-----------|
-| 命令 | `_cmd` | `Cmd` |
-| 查询 | `_qry` | `Qry` |
-| 命令执行器 | `_cmd_exe` | `CmdExe` |
-| 查询执行器 | `_qry_exe` | `QryExe` |
-| 客户端对象 | `_co` | `CO` |
-| 服务接口 | `_service_i` | `ServiceI` |
-| 服务实现 | `_service` | `ServiceImpl` |
-| 网关接口 | `_gateway` | `Gateway` |
-| 网关实现 | `_gateway_impl` | `GatewayImpl` |
-| 转换器 | `_convertor` | `Convertor` |
+---
 
 ## 🎯 实践案例：vibe-blog 项目重构
 
-以下是一个真实的 Python 项目重构案例，展示如何使用 COLA 架构改造一个混乱的代码库。
+> 以下是我的另一个开源项目 [vibe-blog](https://github.com/datawhalechina/vibe-blog) 的真实重构案例。
+> 
+> **vibe-blog** 是一个基于多 Agent 架构的"长文专业博客"创作助手，支持深度调研、智能配图、Mermaid 图表、代码集成等写作能力。
 
-### 重构前的问题
+### 为什么要重构？
+
+vibe-blog 前期开发处于探索阶段，90% 的代码都是通过 Vibe Coding 完成。由于模型生成代码的天性使然——只会新增和堆积，不会自己做重构和优化(没有项目的记忆, 上下文有限等等因素)。
+
+迭代一段时间后，整个代码库越来越混乱，导致：
+- 模型需要加载的**无效上下文越来越多**，速度慢
+- 大量**无效 Token** 是一笔较大的开销
+- 无意义的代码充斥上下文，导致**生成的代码质量也很差**
+- 项目可维护性差, 作为一个项目的开发者我有时候对一些功能的实现也很困惑, 代码放哪儿了这是? 找到代码后, 尼玛,怎么放在这个模块下了. 
+
+为了扭转这一局面，我使用 `python-cola-skill` 对整个 vibe-blog 进行重构。
+
+### 重构前：混乱的代码库
+
+<p align="center">
+  <img src="./pics/vibe-blog-architect.png" alt="重构前的代码结构" />
+</p>
 
 ```
 backend/
-├── app.py                    # 😱 108KB 巨型文件（2695行）- 所有路由都在这里
-├── services/                 # 扁平化服务层，职责不清
-│   ├── blog_generator/       # 10个 Agent + 36个模板
-│   ├── database_service.py   # 46KB
-│   ├── xhs_service.py        # 42KB
-│   └── ...其他服务混在一起
-└── prompts/                  # 模板目录分散在 3 个位置
+├── app.py                           # 😱 108KB 巨型文件（2695行）- 50+ 个路由全在这里
+├── config.py                        # 7KB 配置文件
+│
+├── services/                        # 扁平化服务层（15+ 个服务文件混在一起）
+│   ├── blog_generator/              # 博客生成子模块
+│   │   ├── agents/                  # 9 个 Agent（planner, writer, artist...）
+│   │   ├── templates/               # 36 个 Jinja2 模板（第1处模板目录）
+│   │   ├── prompts/                 # 第2处模板目录（重复）
+│   │   ├── blog_service.py          # 47KB
+│   │   └── generator.py             # 21KB
+│   │
+│   ├── prompts/                     # 第3处模板目录（又重复）
+│   ├── publishers/                  # 发布器
+│   ├── image_styles/                # 图片风格（第4处模板目录）
+│   │
+│   ├── database_service.py          # 数据库操作
+│   ├── xhs_service.py               # 小红书服务
+│   ├── book_scanner_service.py      # 书籍扫描
+│   ├── video_service.py             # 视频服务
+│   ├── llm_service.py               # LLM 调用
+│   └── ...其他服务
+│
+└── vibe_reviewer/                   # 独立模块（第5处模板目录）
 ```
 
 **核心痛点**：
@@ -425,10 +95,10 @@ backend/
 |------|------|
 | 🔴 **巨型 app.py** | 2695 行，50+ 个路由全部堆在一个文件 |
 | 🔴 **扁平化服务层** | 所有服务平铺，职责不清、依赖混乱 |
-| 🔴 **模板目录分散** | prompts/ 出现在 3 个不同位置 |
+| 🔴 **模板目录分散** | templates/prompts 分散在 **5 个不同位置** |
 | 🔴 **无分层架构** | 路由、业务逻辑、数据访问混在一起 |
 
-### 重构后的 COLA 架构
+### 重构后：清晰的 COLA 架构
 
 ```
 backend/
@@ -459,7 +129,7 @@ backend/
 │   ├── external/                     # 外部服务（LLM、OSS）
 │   └── prompts/                      # 统一管理所有模板
 │
-└── app.py                            # 只做初始化和路由注册
+└── app.py                            # 只做初始化和路由注册（~50行）
 ```
 
 ### 重构效果
@@ -468,26 +138,218 @@ backend/
 |------|--------|--------|
 | **app.py 行数** | 2695 行 | ~50 行 |
 | **路由模块** | 1 个巨型文件 | 12 个独立模块 |
-| **模板目录** | 分散 3 处 | 统一 1 处 |
+| **模板目录** | 分散 5 处 | 统一 1 处 |
 | **可测试性** | 难以单测 | 领域层可独立测试 |
 | **新人上手** | 需要 1 周 | 需要 1 天 |
 
-### 分步重构计划
+---
 
-| Phase | 任务 | 预计时间 | 风险 |
-|-------|------|---------|------|
-| 1 | 拆分路由到 Blueprint | 2-3 小时 | 低 |
-| 2 | 统一 Prompt 模板 | 1 小时 | 低 |
-| 3 | 抽取 Application 层 | 2-3 小时 | 中 |
-| 4 | 抽取 Domain 层 | 3-4 小时 | 中 |
-| 5 | 重构 Infrastructure 层 | 2 小时 | 中 |
-| 6 | 添加错误处理中间件 | 1 小时 | 低 |
+## 🚀 快速开始
 
-**总计**：约 11-14 小时，采用渐进式重构，每步可验证
+### 安装
+
+**方法一：Git 克隆（推荐）**
+
+```bash
+# 克隆整个仓库到 skills 目录
+git clone https://github.com/lailoo/cola-DDD-skill.git ~/.claude/skills/cola-DDD-skill
+```
+
+**方法二：手动安装**
+
+1. 下载本项目的 ZIP 文件
+2. 将 skill 文件夹复制到 Claude Code 的 skills 目录：
+   - **macOS/Linux**: `~/.claude/skills/`
+   - **Windows**: `%USERPROFILE%\.claude\skills\`
+
+### 使用
+
+当你提到以下关键词时，Skill 会被自动激活：
+
+- **通用**：COLA、DDD、分层架构、整洁架构、六边形架构、Gateway 模式
+- **Python**：Python DDD、Flask 架构、FastAPI 架构
+- **Java**：Java DDD、Spring Boot 架构、Maven 多模块
+
+**使用示例**：
+
+```
+请帮我用 COLA 架构创建一个 Flask 用户管理系统
+```
+
+```
+我有一个 Spring Boot 单体应用，请帮我按 COLA 架构重构
+```
 
 ---
 
-## 文件说明
+## 📚 COLA 架构详解
+
+> 如果你想深入了解 COLA 架构的设计思想，请继续阅读。
+
+### 为什么需要分层？
+
+你有没有见过那种"上帝类"？一个 `XXXService.java` 几千行代码，从接收请求、校验参数、调用数据库、发送消息、返回结果全都塞在一起。改一个小功能，得把整个文件翻一遍，生怕改错了哪里。
+
+**分层的本质是"分而治之"。**
+
+就像你不会让前端工程师去写 SQL，也不会让 DBA 去调 CSS 一样——每个人专注自己擅长的事情，效率最高。代码也是如此：
+- **接口层**专注于接收请求、返回响应
+- **业务层**专注于核心逻辑计算
+- **数据层**专注于存取数据
+
+各司其职，互不干扰。改数据库不影响业务逻辑，换前端框架不用动后端代码。这背后体现了几个重要的设计原则：
+- **封装**：下层对上层屏蔽实现细节，上层不需要知道数据是存在 MySQL 还是 Redis
+- **单一职责**：每一层只做一件事，职责边界清晰
+- **高内聚低耦合**：相关代码聚在一起，不相关的代码彼此隔离
+
+最终目的：**从而避免不断堆出来大一统的屎山代码文件, 比如某个几千行的 service类.**。
+
+### 为什么需要 COLA？
+
+分层架构的思想大家都懂，六边形、洋葱圈、整洁架构……概念一大堆。但问题是：**具体怎么落地？**
+
+- 这个类应该放在哪个包下？
+- Gateway 和 Repository 有什么区别？
+- Command 和 Query 要不要分开？
+- DTO、VO、DO、Entity 到底怎么转换？
+
+很多架构文章讲完思想就结束了，留下一脸懵逼的你。
+
+**COLA 不一样。** 它不仅告诉你"应该分层"，还告诉你：
+- 每一层叫什么名字
+- 每一层放什么代码
+- 类应该怎么命名
+- 甚至提供了脚手架，一键生成标准目录结构
+
+这就是 COLA 的价值——**从理论到实践的最后一公里**。
+
+| 问题 | COLA 的解决方案 |
+|------|----------------|
+| 🔴 **业务逻辑散落各处** | 领域层集中管理核心业务逻辑 |
+| 🔴 **技术实现与业务耦合** | 分层架构解耦，Infrastructure 实现 Domain 接口 |
+| 🔴 **代码难以测试** | 依赖倒置，Domain 层无外部依赖，易于单测 |
+| 🔴 **新人上手困难** | 标准化目录结构和命名规范 |
+| 🔴 **重构成本高** | 清晰的边界，改动影响范围可控 |
+
+### 分层结构
+
+COLA 将应用分为四层，每一层都有明确的职责定义：
+
+| 层级 | 职责 | 大白话解释 |
+|------|------|-----------|
+| **Adapter 层**（适配层） | 负责对前端展示（web、wireless、wap）的路由和适配 | 就是 MVC 中的 Controller，接收请求、返回响应 |
+| **App 层**（应用层） | 获取输入、组装上下文、参数校验、调用领域层做业务处理 | 编排调度员，不干活，只负责协调各方 |
+| **Domain 层**（领域层） | 封装核心业务逻辑，提供业务实体和业务逻辑计算 | 真正干活的地方，**不依赖任何其他层** |
+| **Infrastructure 层**（基础设施层） | 处理技术细节（数据库 CRUD、搜索引擎、RPC 等） | 脏活累活都在这里，外部依赖通过 Gateway 转义后才能被上层使用 |
+
+```
+                        ┌─────────────────────────────────────┐
+  Driving Adapter:      │  浏览器  │  定时器  │  消息队列      │
+                        └─────────────────────────────────────┘
+                                         ↓
+  VO ←─────────────── ┌─────────────────────────────────────┐
+  (View Object)       │            Adapter 层                │
+                      │  controller │ scheduler │ consumer   │
+                      └─────────────────────────────────────┘
+                                         ↓
+  DTO ←────────────── ┌─────────────────────────────────────┐
+  (Data Transfer      │              App 层                  │
+   Object)            │       service  │  executor           │
+                      └─────────────────────────────────────┘
+                                         ↓
+  Entity ←─────────── ┌─────────────────────────────────────┐
+                      │            Domain 层                 │
+                      │   gateway │ model │ ability          │
+                      └─────────────────────────────────────┘
+                                         ↑
+  DO ←─────────────── ┌─────────────────────────────────────┐
+  (Data Object)       │        Infrastructure 层             │
+                      │  gatewayImpl │ mapper │ config       │
+                      └─────────────────────────────────────┘
+                                         ↓
+  Driven Adapter:     │    DB    │   Search   │    RPC      │
+```
+
+> 💡 **参考来源**：[COLA 4.0：应用架构的最佳实践](https://blog.csdn.net/significantfrank/article/details/110934799)
+
+### 依赖方向：为什么 Domain 层最特殊？
+
+```
+Adapter → App → Domain ← Infrastructure
+              ↘      ↙
+               Client
+```
+
+注意看箭头方向：
+
+| 规则 | 解释 |
+|------|------|
+| **Domain 层不依赖任何层** | 纯业务逻辑，可以独立测试，不需要启动数据库 |
+| **Infrastructure 依赖 Domain** | Infrastructure 实现 Domain 定义的 Gateway 接口（依赖倒置） |
+| **Client 被所有层依赖** | Client 层定义了 DTO（数据传输对象），大家都要用 |
+
+**为什么这样设计？**
+
+假设有一天你要把 MySQL 换成 PostgreSQL：
+- ❌ **传统做法**：Domain 层直接调用 MySQL，换数据库要改业务代码
+- ✅ **COLA 做法**：Domain 层只调用 Gateway 接口，换数据库只需要改 Infrastructure 层的实现
+
+这就是**依赖倒置**的威力——核心业务不受技术选型的影响。
+
+---
+
+### COLA 组件（可选增强）
+
+COLA 还提供了一些开箱即用的组件，按需引入：
+
+| 组件 | 用途 | 使用场景 |
+|------|------|----------|
+| **DTO** | 统一的 Response、Command、Query 基类 | 所有项目 |
+| **Exception** | 统一异常处理 | 所有项目 |
+| **Extension** | 扩展点机制 | 多业务线、多租户 |
+| **StateMachine** | 状态机 | 订单状态流转、审批流程 |
+| **CatchLog** | 异常捕获和日志 | 简化 try-catch |
+| **RuleEngine** | 规则引擎 | 复杂业务规则 |
+
+---
+
+### COLA Archetypes（项目脚手架）
+
+不想手动创建目录？COLA 提供了两种脚手架，一键生成标准项目结构：
+
+| Archetype | 用途 | 包含模块 |
+|-----------|------|----------|
+| `cola-archetype-web` | Web 应用（有前端接口） | adapter, app, client, domain, infrastructure, start |
+| `cola-archetype-service` | 纯后端服务（RPC/Dubbo） | app, client, domain, infrastructure, start |
+
+```bash
+# 创建 Web 应用
+mvn archetype:generate \
+  -DarchetypeGroupId=com.alibaba.cola \
+  -DarchetypeArtifactId=cola-framework-archetype-web \
+  -DarchetypeVersion=4.3.1
+```
+
+> 💡 **参考来源**：[COLA 4.0：应用架构的最佳实践](https://blog.csdn.net/significantfrank/article/details/110934799)
+
+### 命名规范
+
+| 类型 | Python 后缀 | Java 后缀 |
+|------|-------------|-----------|
+| 命令 | `_cmd` | `Cmd` |
+| 查询 | `_qry` | `Qry` |
+| 命令执行器 | `_cmd_exe` | `CmdExe` |
+| 查询执行器 | `_qry_exe` | `QryExe` |
+| 客户端对象 | `_co` | `CO` |
+| 服务接口 | `_service_i` | `ServiceI` |
+| 服务实现 | `_service` | `ServiceImpl` |
+| 网关接口 | `_gateway` | `Gateway` |
+| 网关实现 | `_gateway_impl` | `GatewayImpl` |
+| 转换器 | `_convertor` | `Convertor` |
+
+---
+
+## 📁 文件说明
 
 ```
 cola-DDD-skill/
@@ -508,16 +370,19 @@ cola-DDD-skill/
         └── example.md           # 完整示例 + Maven 配置
 ```
 
-## 参考资源
+---
+
+## 🔗 参考资源
 
 - [COLA GitHub](https://github.com/alibaba/COLA) - 阿里巴巴 COLA 官方仓库
 - [COLA 4.0：应用架构的最佳实践](https://blog.csdn.net/significantfrank/article/details/110934799)
+- [vibe-blog](https://github.com/datawhalechina/vibe-blog) - 本文实践案例的开源项目
 
-## 贡献
+---
+
+## 🤝 贡献
 
 欢迎提交 Issue 或 Pull Request 来改进这些 Skills。
-
-### 贡献指南
 
 1. Fork 本仓库
 2. 创建你的特性分支 (`git checkout -b feature/amazing-feature`)
@@ -525,7 +390,9 @@ cola-DDD-skill/
 4. 推送到分支 (`git push origin feature/amazing-feature`)
 5. 打开一个 Pull Request
 
-## 许可
+---
+
+## 📄 许可
 
 MIT License
 
