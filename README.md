@@ -172,6 +172,23 @@ COLA = Clean Object-Oriented and Layered Architecture（整洁面向对象分层
 └─────────────┴─────────────┴─────────────┴─────────────────┘
 ```
 
+### COLA Archetypes
+
+COLA 提供两种项目脚手架：
+
+| Archetype | 用途 | 包含模块 |
+|-----------|------|----------|
+| `cola-archetype-web` | Web 应用（Adapter + 后端服务一体） | adapter, app, client, domain, infrastructure, start |
+| `cola-archetype-service` | 纯后端服务（无 Web 层） | app, client, domain, infrastructure, start |
+
+```bash
+# 创建 Web 应用
+mvn archetype:generate -DarchetypeArtifactId=cola-framework-archetype-web ...
+
+# 创建纯后端服务
+mvn archetype:generate -DarchetypeArtifactId=cola-framework-archetype-service ...
+```
+
 ### 依赖方向
 
 ```

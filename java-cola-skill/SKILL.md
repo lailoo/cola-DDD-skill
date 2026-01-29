@@ -100,15 +100,57 @@ project-name/
 
 ## 快速创建项目
 
+COLA 提供两种 Archetype：
+
+### cola-archetype-web（Web 应用）
+
+适用于 Adapter 和后端服务一体的 Web 应用：
+
 ```bash
 mvn archetype:generate \
     -DgroupId=com.company.project \
-    -DartifactId=my-project \
+    -DartifactId=my-web-app \
     -Dversion=1.0.0-SNAPSHOT \
     -Dpackage=com.company.project \
     -DarchetypeArtifactId=cola-framework-archetype-web \
     -DarchetypeGroupId=com.alibaba.cola \
     -DarchetypeVersion=5.0.0
+```
+
+生成结构：
+```
+my-web-app/
+├── my-web-app-adapter/      # Controller、定时任务、消息监听
+├── my-web-app-app/          # Service 实现、执行器
+├── my-web-app-client/       # API 接口、DTO
+├── my-web-app-domain/       # 领域模型、Gateway 接口
+├── my-web-app-infrastructure/  # Gateway 实现、Mapper
+└── start/                   # 启动模块
+```
+
+### cola-archetype-service（纯后端服务）
+
+适用于纯后端服务（无 Web 层）：
+
+```bash
+mvn archetype:generate \
+    -DgroupId=com.company.project \
+    -DartifactId=my-service \
+    -Dversion=1.0.0-SNAPSHOT \
+    -Dpackage=com.company.project \
+    -DarchetypeArtifactId=cola-framework-archetype-service \
+    -DarchetypeGroupId=com.alibaba.cola \
+    -DarchetypeVersion=5.0.0
+```
+
+生成结构：
+```
+my-service/
+├── my-service-app/          # Service 实现、执行器
+├── my-service-client/       # API 接口、DTO（供其他服务调用）
+├── my-service-domain/       # 领域模型、Gateway 接口
+├── my-service-infrastructure/  # Gateway 实现、Mapper
+└── start/                   # 启动模块
 ```
 
 ## COLA 组件
