@@ -27,21 +27,19 @@ COLA DDD Skill 是一个 Claude Code Skills 集合，包含 COLA（Clean Object-
 
 ```bash
 # 克隆整个仓库到 skills 目录
-git clone https://github.com/YOUR_USERNAME/cola-DDD-skill.git ~/.claude/skills/cola-DDD-skill
+git clone https://github.com/lailoo/cola-DDD-skill.git ~/.claude/skills/cola-DDD-skill
 ```
 
 或者只安装单个 skill：
 
 ```bash
 # 只安装 Python COLA Skill
-git clone https://github.com/YOUR_USERNAME/cola-DDD-skill.git /tmp/cola-skill
-cp -r /tmp/cola-skill/python-cola-skill ~/.claude/skills/
-rm -rf /tmp/cola-skill
+git clone https://github.com/lailoo/cola-DDD-skill.git /tmp/cola-skill
+cp -r ~/cola-skill/python-cola-skill ~/.claude/skills/
 
 # 只安装 Java COLA Skill
-git clone https://github.com/YOUR_USERNAME/cola-DDD-skill.git /tmp/cola-skill
-cp -r /tmp/cola-skill/java-cola-skill ~/.claude/skills/
-rm -rf /tmp/cola-skill
+git clone https://github.com/lailoo/cola-DDD-skill.git ~/cola-skill
+cp -r ~/cola-skill/java-cola-skill ~/.claude/skills/
 ```
 
 ### 方法二：手动安装
