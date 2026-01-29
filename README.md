@@ -402,6 +402,91 @@ Adapter → App → Domain ← Infrastructure
 | 网关实现 | `_gateway_impl` | `GatewayImpl` |
 | 转换器 | `_convertor` | `Convertor` |
 
+## 🎯 实践案例：vibe-blog 项目重构
+
+以下是一个真实的 Python 项目重构案例，展示如何使用 COLA 架构改造一个混乱的代码库。
+
+### 重构前的问题
+
+```
+backend/
+├── app.py                    # 😱 108KB 巨型文件（2695行）- 所有路由都在这里
+├── services/                 # 扁平化服务层，职责不清
+│   ├── blog_generator/       # 10个 Agent + 36个模板
+│   ├── database_service.py   # 46KB
+│   ├── xhs_service.py        # 42KB
+│   └── ...其他服务混在一起
+└── prompts/                  # 模板目录分散在 3 个位置
+```
+
+**核心痛点**：
+
+| 问题 | 描述 |
+|------|------|
+| 🔴 **巨型 app.py** | 2695 行，50+ 个路由全部堆在一个文件 |
+| 🔴 **扁平化服务层** | 所有服务平铺，职责不清、依赖混乱 |
+| 🔴 **模板目录分散** | prompts/ 出现在 3 个不同位置 |
+| 🔴 **无分层架构** | 路由、业务逻辑、数据访问混在一起 |
+
+### 重构后的 COLA 架构
+
+```
+backend/
+├── api/                              # 接口层（Controller）
+│   ├── routes/
+│   │   ├── blog_routes.py            # 博客生成路由
+│   │   ├── xhs_routes.py             # 小红书路由
+│   │   ├── book_routes.py            # 书籍管理路由
+│   │   └── ...（12 个路由模块）
+│   └── middlewares/
+│       └── error_handler.py          # 统一错误处理
+│
+├── application/                      # 应用层（用例编排）
+│   ├── blog_application.py           # 博客生成用例
+│   ├── xhs_application.py            # 小红书用例
+│   └── ...（5 个用例服务）
+│
+├── domain/                           # 领域层（核心业务）
+│   ├── blog/
+│   │   ├── entities.py               # Blog, Section 实体
+│   │   ├── value_objects.py          # ArticleType 值对象
+│   │   └── agents/                   # 领域服务
+│   ├── xhs/
+│   └── book/
+│
+├── infrastructure/                   # 基础设施层
+│   ├── persistence/                  # 持久化
+│   ├── external/                     # 外部服务（LLM、OSS）
+│   └── prompts/                      # 统一管理所有模板
+│
+└── app.py                            # 只做初始化和路由注册
+```
+
+### 重构效果
+
+| 指标 | 重构前 | 重构后 |
+|------|--------|--------|
+| **app.py 行数** | 2695 行 | ~50 行 |
+| **路由模块** | 1 个巨型文件 | 12 个独立模块 |
+| **模板目录** | 分散 3 处 | 统一 1 处 |
+| **可测试性** | 难以单测 | 领域层可独立测试 |
+| **新人上手** | 需要 1 周 | 需要 1 天 |
+
+### 分步重构计划
+
+| Phase | 任务 | 预计时间 | 风险 |
+|-------|------|---------|------|
+| 1 | 拆分路由到 Blueprint | 2-3 小时 | 低 |
+| 2 | 统一 Prompt 模板 | 1 小时 | 低 |
+| 3 | 抽取 Application 层 | 2-3 小时 | 中 |
+| 4 | 抽取 Domain 层 | 3-4 小时 | 中 |
+| 5 | 重构 Infrastructure 层 | 2 小时 | 中 |
+| 6 | 添加错误处理中间件 | 1 小时 | 低 |
+
+**总计**：约 11-14 小时，采用渐进式重构，每步可验证
+
+---
+
 ## 文件说明
 
 ```
@@ -426,8 +511,7 @@ cola-DDD-skill/
 ## 参考资源
 
 - [COLA GitHub](https://github.com/alibaba/COLA) - 阿里巴巴 COLA 官方仓库
-- [COLA 5.0 发布说明](https://blog.csdn.net/significantfrank/article/details/110934799)
-- [《程序员的底层思维》](https://item.jd.com/13652002.html) - COLA 作者新书
+- [COLA 4.0：应用架构的最佳实践](https://blog.csdn.net/significantfrank/article/details/110934799)
 
 ## 贡献
 
