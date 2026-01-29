@@ -58,10 +58,6 @@ vibe-blog 前期开发处于探索阶段，90% 的代码都是通过 Vibe Coding
 
 ### 重构前：混乱的代码库
 
-<p align="center">
-  <img src="./static/pics/vibe-blog-architect.png" alt="重构前的代码结构" />
-</p>
-
 ```
 backend/
 ├── app.py                           # 😱 108KB 巨型文件（2695行）- 50+ 个路由全在这里
