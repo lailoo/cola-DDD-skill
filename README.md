@@ -296,10 +296,56 @@ demo-web/
 ```
 demo-service/
 ├── demo-service-app/                    # 应用层
+│   └── src/main/java/com/demo/
+│       ├── command/                     # 命令执行器
+│       │   ├── OrderCreateCmdExe.java
+│       │   └── query/                   # 查询执行器
+│       │       └── OrderListQryExe.java
+│       ├── service/                     # Service 实现
+│       │   └── OrderServiceImpl.java
+│       └── event/                       # 事件处理
+│           └── handler/
+│               └── OrderEventHandler.java
+│
 ├── demo-service-client/                 # 客户端层（供其他服务调用）
+│   └── src/main/java/com/demo/
+│       ├── api/                         # 服务接口（RPC/Dubbo）
+│       │   └── OrderServiceI.java
+│       └── dto/                         # 数据传输对象
+│           ├── command/
+│           │   └── OrderCreateCmd.java
+│           ├── query/
+│           │   └── OrderListQry.java
+│           └── clientobject/
+│               └── OrderCO.java
+│
 ├── demo-service-domain/                 # 领域层
+│   └── src/main/java/com/demo/domain/
+│       ├── order/                       # 订单聚合
+│       │   ├── Order.java               # 聚合根
+│       │   ├── OrderItem.java           # 实体
+│       │   └── OrderStatus.java         # 值对象/枚举
+│       ├── gateway/                     # Gateway 接口
+│       │   └── OrderGateway.java
+│       └── ability/                     # 领域能力
+│           └── OrderAbility.java
+│
 ├── demo-service-infrastructure/         # 基础设施层
+│   └── src/main/java/com/demo/
+│       ├── gatewayimpl/                 # Gateway 实现
+│       │   └── OrderGatewayImpl.java
+│       ├── convertor/                   # 对象转换器
+│       │   └── OrderConvertor.java
+│       ├── dataobject/                  # 数据对象
+│       │   └── OrderDO.java
+│       ├── mapper/                      # MyBatis Mapper
+│       │   └── OrderMapper.java
+│       └── config/                      # 配置类
+│           └── DataSourceConfig.java
+│
 └── start/                               # 启动模块
+    └── src/main/java/com/demo/
+        └── Application.java
 ```
 
 ### 依赖方向
