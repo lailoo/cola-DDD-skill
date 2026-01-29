@@ -189,6 +189,80 @@ mvn archetype:generate -DarchetypeArtifactId=cola-framework-archetype-web ...
 mvn archetype:generate -DarchetypeArtifactId=cola-framework-archetype-service ...
 ```
 
+### 生成的项目结构示例
+
+**cola-archetype-web 生成结构：**
+
+```
+demo-web/
+├── demo-web-adapter/                    # 适配器层
+│   └── src/main/java/com/demo/
+│       ├── web/                         # REST Controller
+│       │   └── UserController.java
+│       ├── mobile/                      # 移动端接口
+│       ├── wap/                         # WAP 接口
+│       └── scheduler/                   # 定时任务
+│           └── DemoJob.java
+│
+├── demo-web-app/                        # 应用层
+│   └── src/main/java/com/demo/
+│       ├── command/                     # 命令执行器
+│       │   ├── UserAddCmdExe.java
+│       │   └── query/                   # 查询执行器
+│       │       └── UserListQryExe.java
+│       ├── service/                     # Service 实现
+│       │   └── UserServiceImpl.java
+│       └── event/                       # 事件处理
+│           └── handler/
+│
+├── demo-web-client/                     # 客户端层（API 定义）
+│   └── src/main/java/com/demo/
+│       ├── api/                         # 服务接口
+│       │   └── UserServiceI.java
+│       └── dto/                         # 数据传输对象
+│           ├── command/
+│           │   └── UserAddCmd.java
+│           ├── query/
+│           │   └── UserListQry.java
+│           └── clientobject/
+│               └── UserCO.java
+│
+├── demo-web-domain/                     # 领域层
+│   └── src/main/java/com/demo/domain/
+│       ├── user/                        # 用户聚合
+│       │   ├── User.java                # 实体
+│       │   └── UserStatus.java          # 值对象
+│       └── gateway/                     # Gateway 接口
+│           └── UserGateway.java
+│
+├── demo-web-infrastructure/             # 基础设施层
+│   └── src/main/java/com/demo/
+│       ├── gatewayimpl/                 # Gateway 实现
+│       │   └── UserGatewayImpl.java
+│       ├── convertor/                   # 对象转换器
+│       │   └── UserConvertor.java
+│       ├── dataobject/                  # 数据对象
+│       │   └── UserDO.java
+│       ├── mapper/                      # MyBatis Mapper
+│       │   └── UserMapper.java
+│       └── config/                      # 配置类
+│
+└── start/                               # 启动模块
+    └── src/main/java/com/demo/
+        └── Application.java
+```
+
+**cola-archetype-service 生成结构（无 adapter 层）：**
+
+```
+demo-service/
+├── demo-service-app/                    # 应用层
+├── demo-service-client/                 # 客户端层（供其他服务调用）
+├── demo-service-domain/                 # 领域层
+├── demo-service-infrastructure/         # 基础设施层
+└── start/                               # 启动模块
+```
+
 ### 依赖方向
 
 ```
