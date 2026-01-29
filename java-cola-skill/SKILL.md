@@ -10,6 +10,36 @@ COLA = Clean Object-Oriented and Layered Architecture（整洁面向对象分层
 ## 分层架构
 
 ```
+                        ┌─────────────────────────────────────┐
+  Driving Adapter:      │  浏览器  │  定时器  │  消息队列      │
+                        └─────────────────────────────────────┘
+                                         ↓
+  VO ←─────────────── ┌─────────────────────────────────────┐
+  (View Object)       │            Adapter 层                │
+                      │  controller │ scheduler │ consumer   │
+                      └─────────────────────────────────────┘
+                                         ↓
+  DTO ←────────────── ┌─────────────────────────────────────┐
+  (Data Transfer      │              App 层                  │
+   Object)            │       service  │  executor           │
+                      └─────────────────────────────────────┘
+                                         ↓
+  Entity ←─────────── ┌─────────────────────────────────────┐
+                      │            Domain 层                 │
+                      │   gateway │ model │ ability          │
+                      └─────────────────────────────────────┘
+                                         ↑
+  DO ←─────────────── ┌─────────────────────────────────────┐
+  (Data Object)       │        Infrastructure 层             │
+                      │  gatewayImpl │ mapper │ config       │
+                      └─────────────────────────────────────┘
+                                         ↓
+  Driven Adapter:     │    DB    │   Search   │    RPC      │
+```
+
+### 依赖方向
+
+```
 Adapter → App → Domain ← Infrastructure
               ↘      ↙
                Client
@@ -17,10 +47,10 @@ Adapter → App → Domain ← Infrastructure
 
 | 层 | 职责 | 实现 |
 |---|------|------|
-| **Adapter** | 接收外部请求 | Controller, 消息监听, 定时任务 |
+| **Adapter** | 接收外部请求 | Controller, Scheduler, Consumer |
 | **App** | 用例编排 | ServiceImpl, CmdExe, QryExe |
-| **Domain** | 核心业务逻辑 | Entity, ValueObject, Gateway 接口 |
-| **Infrastructure** | 技术实现 | GatewayImpl, Mapper |
+| **Domain** | 核心业务逻辑 | Entity, ValueObject, Gateway, Ability |
+| **Infrastructure** | 技术实现 | GatewayImpl, Mapper, Config |
 | **Client** | DTO 定义 | Command, Query, CO, ServiceI |
 
 ## 目录结构
@@ -85,11 +115,14 @@ mvn archetype:generate \
 
 | 组件 | 功能 |
 |------|------|
-| `cola-component-dto` | Response, PageResponse 等 |
-| `cola-component-exception` | BizException, SysException |
-| `cola-component-catchlog-starter` | @CatchAndLog 注解 |
-| `cola-component-statemachine` | 状态机 |
-| `cola-component-extension-starter` | 扩展点 |
+| `cola-component-dto` | Response, Command, Query, PageResponse |
+| `cola-component-exception` | BizException, SysException, ErrorCode |
+| `cola-component-catchlog-starter` | @CatchAndLog 异常捕获和日志 |
+| `cola-component-extension-starter` | 扩展点机制（多业务线支持） |
+| `cola-component-statemachine` | 状态机（订单流转等） |
+| `cola-component-domain-starter` | Spring 托管领域实体 |
+| `cola-component-ruleengine` | 规则引擎 |
+| `cola-component-test-container` | 测试容器 |
 
 ## 代码模板
 
@@ -97,6 +130,7 @@ mvn archetype:generate \
 - **DTO 和 Response**: [references/dto.md](references/dto.md)
 - **Service 和执行器**: [references/service.md](references/service.md)
 - **Gateway 模式**: [references/gateway.md](references/gateway.md)
+- **COLA 组件详解**: [references/components.md](references/components.md)
 - **完整示例**: [references/example.md](references/example.md)
 
 ## 重构检查清单
